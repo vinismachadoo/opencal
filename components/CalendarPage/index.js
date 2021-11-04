@@ -18,7 +18,7 @@ const index = () => {
     ]);
   }, []);
 
-  const EventsToDisplay = EVENTOS.filter((event) => {
+  const eventsToDisplay = EVENTOS.filter((event) => {
     const eventDay = new Date(
       event.startDate.year,
       event.startDate.month - 1,
@@ -27,7 +27,26 @@ const index = () => {
       event.startDate.minute
     ).getDate();
     const desiredDay = calendarDate.getDate();
-    return eventDay === desiredDay;
+
+    if (
+      Object.keys(filterStates).length === 0 &&
+      filterStates.constructor === Object
+    ) {
+      return eventDay === desiredDay;
+    } else {
+      const filterSelectedNames = filterStates
+        .filter((filter) => filter.selected)
+        .map((filter) => filter.name);
+
+      if (filterSelectedNames.length) {
+        const isTagged = filterSelectedNames.filter((value) =>
+          event.tags.includes(value)
+        ).length;
+        return eventDay === desiredDay && isTagged;
+      } else {
+        return eventDay === desiredDay;
+      }
+    }
   });
 
   const daysWithEvents = EVENTOS.map((event) =>
@@ -52,7 +71,7 @@ const index = () => {
       {/* Main section */}
       <div className="w-full xl:w-4/5">
         <Header date={calendarDate} onDateChange={setCalendarDate} />
-        <CardsSection filters={filterStates} events={EventsToDisplay} />
+        <CardsSection filters={filterStates} events={eventsToDisplay} />
       </div>
     </div>
   );
