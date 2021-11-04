@@ -5,7 +5,7 @@ import {
   UserCircleIcon,
   CogIcon,
   LogoutIcon,
-  HeartIcon,
+  BookmarkIcon,
 } from "@heroicons/react/outline";
 
 const Right = () => {
@@ -21,7 +21,7 @@ const Right = () => {
       >
         <a href="/favorites">
           <span className="sr-only">View my events</span>
-          <HeartIcon className="h-6 w-6" aria-hidden="true" />
+          <BookmarkIcon className="h-6 w-6" aria-hidden="true" />
         </a>
       </button>
       <Menu as="div" className="ml-3 relative">
