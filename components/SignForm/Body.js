@@ -5,10 +5,7 @@ export const NewsletterCheckbox = () => {
     <div className="mt-6 block text-xs md:text-sm text-gray-800">
       <input
         type="checkbox"
-        className={classNames(
-          theme === "signup" ? "focus:ring-blue-400" : "focus:ring-purple-400",
-          "inline-block mr-2 focus:outline-none focus:ring-2 focus:border-transparent border-2 rounded border-gray-300"
-        )}
+        className="focus:ring-blue-400 inline-block mr-2 focus:outline-none focus:ring-2 focus:border-transparent border-2 rounded border-gray-300"
       />
       <span display="inline">
         Concordo em receber novidades sobre os próximos eventos adicionados ao
@@ -39,7 +36,7 @@ const Body = ({ inputs, newsletter, buttonText, theme, googleText }) => {
           />
         </div>
       ))}
-      {newsletter && <NewsletterCheckbox />}
+      {newsletter && <NewsletterCheckbox theme={theme} />}
       <SimpleButton theme={theme} buttonText={buttonText} />
       <hr className="my-1 md:my-3" />
       <GoogleButton googleText={googleText} />
