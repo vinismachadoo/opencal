@@ -1,16 +1,12 @@
 import EventCard from "./EventCard";
 
-const CardsSection = ({ filters, events }) => {
-  // Filtros com true
-  // const isTagSelected = (tag) => {
-
-  //   filters.map((filter) => filter.name === tag && (filter.selected))
-  // }
-
+const CardsSection = ({ events }) => {
   return (
     <div className="py-3 grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4">
       {events.map((evento) => (
-        <EventCard key={evento.id} eventData={evento} />
+        <a key={evento.id} href="/event/2">
+          <EventCard eventData={evento} />
+        </a>
       ))}
     </div>
   );
