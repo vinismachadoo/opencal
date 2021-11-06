@@ -46,71 +46,66 @@ export const FilterTag = ({ singleFilter, allFilters, onFilterClick }) => {
 };
 
 const FilterSection = ({ filters, onFilterClick }) => {
-  // Filters render vazio dps pega useEffect
-  if (Object.keys(filters).length === 0 && filters.constructor === Object) {
-    return <></>;
-  } else {
-    const selectionState = filters.map((filter) => filter.selected);
-    const isAtLeastOneSelected = selectionState.some((e) => e === true);
-    const isAtLeastOneNotSelected = selectionState.some((e) => e === false);
+  const selectionState = filters.map((filter) => filter.selected);
+  const isAtLeastOneSelected = selectionState.some((e) => e === true);
+  const isAtLeastOneNotSelected = selectionState.some((e) => e === false);
 
-    return (
-      <>
-        {/* Só mostar o div se tiver algum filtro selecionado */}
-        {isAtLeastOneSelected && (
-          <div className="text-black text-xs font-bold mt-3">
-            <div className="flex">
-              <ChevronRightIcon
-                className="flex-shrink-0 mr-0.5 h-4 w-4 group-hover:text-green-500"
-                aria-hidden="true"
-              />
-              Filtros Selecionados
-            </div>
-            <div className="border border-gray-200 bg-gray-50 rounded-md flex flex-wrap mt-1 p-1">
-              {/* Mostrar filtros selecionados */}
-              {filters.map(
-                (filter) =>
-                  filter.selected && (
-                    <FilterTag
-                      key={filter.id}
-                      allFilters={filters}
-                      singleFilter={filter}
-                      onFilterClick={onFilterClick}
-                    />
-                  )
-              )}
-            </div>
+  return (
+    <>
+      {/* Só mostar o div se tiver algum filtro selecionado */}
+      {isAtLeastOneSelected && (
+        <div className="text-black text-xs font-bold mt-3">
+          <div className="flex">
+            <ChevronRightIcon
+              className="flex-shrink-0 mr-0.5 h-4 w-4 group-hover:text-green-500"
+              aria-hidden="true"
+            />
+            Filtros Selecionados
           </div>
-        )}
-        {/* Só mostrar o div se tiver algum filtro não selecionado */}
-        {isAtLeastOneNotSelected && (
-          <div className="text-black text-xs font-bold mt-3">
-            <div className="flex">
-              <ChevronRightIcon
-                className="flex-shrink-0 mr-0.5 h-4 w-4 group-hover:text-green-500"
-                aria-hidden="true"
-              />
-              Filtros disponíveis
-            </div>
-            <div className="flex flex-wrap border border-gray-200 bg-gray-50 rounded-md mt-1 p-1">
-              {/* Mostrar filtros não selecionados */}
-              {filters.map(
-                (filter) =>
-                  !filter.selected && (
-                    <FilterTag
-                      key={filter.id}
-                      allFilters={filters}
-                      singleFilter={filter}
-                      onFilterClick={onFilterClick}
-                    />
-                  )
-              )}
-            </div>
+          <div className="border border-gray-200 bg-gray-50 rounded-md flex flex-wrap mt-1 p-1">
+            {/* Mostrar filtros selecionados */}
+            {filters.map(
+              (filter) =>
+                filter.selected && (
+                  <FilterTag
+                    key={filter.id}
+                    allFilters={filters}
+                    singleFilter={filter}
+                    onFilterClick={onFilterClick}
+                  />
+                )
+            )}
           </div>
-        )}
-      </>
-    );
-  }
+        </div>
+      )}
+      {/* Só mostrar o div se tiver algum filtro não selecionado */}
+      {isAtLeastOneNotSelected && (
+        <div className="text-black text-xs font-bold mt-3">
+          <div className="flex">
+            <ChevronRightIcon
+              className="flex-shrink-0 mr-0.5 h-4 w-4 group-hover:text-green-500"
+              aria-hidden="true"
+            />
+            Filtros disponíveis
+          </div>
+          <div className="flex flex-wrap border border-gray-200 bg-gray-50 rounded-md mt-1 p-1">
+            {/* Mostrar filtros não selecionados */}
+            {filters.map(
+              (filter) =>
+                !filter.selected && (
+                  <FilterTag
+                    key={filter.id}
+                    allFilters={filters}
+                    singleFilter={filter}
+                    onFilterClick={onFilterClick}
+                  />
+                )
+            )}
+          </div>
+        </div>
+      )}
+    </>
+  );
 };
 
 export default FilterSection;

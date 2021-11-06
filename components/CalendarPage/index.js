@@ -7,15 +7,16 @@ import { EVENTOS } from "../../globals";
 
 const index = () => {
   const [calendarDate, setCalendarDate] = useState(new Date());
-  const [filterStates, setFilterStates] = useState({});
+  const [filterStates, setFilterStates] = useState([]);
 
   useEffect(() => {
-    setFilterStates([
+    const defaultFilters = [
       { id: 1, name: "Funk", selected: false },
       { id: 2, name: "Pagode", selected: false },
       { id: 3, name: "Eletrônica", selected: false },
       { id: 4, name: "Brasilidades", selected: false },
-    ]);
+    ];
+    setFilterStates(defaultFilters);
   }, []);
 
   const eventsToDisplay = EVENTOS.filter((event) => {
@@ -26,27 +27,19 @@ const index = () => {
       event.startDate.hour,
       event.startDate.minute
     ).getDate();
-    const desiredDay = calendarDate.getDate();
 
-    if (
-      Object.keys(filterStates).length === 0 &&
-      filterStates.constructor === Object
-    ) {
-      return eventDay === desiredDay;
-    } else {
-      const filterSelectedNames = filterStates
-        .filter((filter) => filter.selected)
-        .map((filter) => filter.name);
+    const selectedDay = calendarDate.getDate();
 
-      if (filterSelectedNames.length) {
-        const isTagged = filterSelectedNames.filter((value) =>
-          event.tags.includes(value)
-        ).length;
-        return eventDay === desiredDay && isTagged;
-      } else {
-        return eventDay === desiredDay;
-      }
-    }
+    const filterSelectedNames = filterStates
+      .filter((filter) => filter.selected)
+      .map((filter) => filter.name);
+
+    const tagMatchSelection = filterSelectedNames.filter((value) =>
+      event.tags.includes(value)
+    ).length;
+    return filterSelectedNames.length
+      ? eventDay === selectedDay && tagMatchSelection
+      : eventDay === selectedDay;
   });
 
   const daysWithEvents = EVENTOS.map((event) =>
