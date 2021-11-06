@@ -2,7 +2,7 @@ import EventCard from "./EventCard";
 import Buttons from "./Buttons";
 import Dropdown from "./Dropdown";
 
-const EventPage = () => {
+const index = () => {
   return (
     <>
       <div className="lg:flex lg:items-center lg:justify-between">
@@ -22,4 +22,4 @@ const EventPage = () => {
   );
 };
 
-export default EventPage;
+export default index;
