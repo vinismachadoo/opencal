@@ -53,7 +53,7 @@ const index = () => {
   return (
     <div className="flex">
       {/* Left section */}
-      <div className="hidden xl:block w-1/5 mr-4">
+      <div className="hidden lg:block w-64 pr-3 mr-4">
         <InlineCalendar
           date={calendarDate}
           onDateChange={setCalendarDate}
@@ -62,8 +62,12 @@ const index = () => {
         <FilterSection filters={filterStates} onFilterClick={setFilterStates} />
       </div>
       {/* Main section */}
-      <div className="w-full xl:w-4/5">
-        <Header date={calendarDate} onDateChange={setCalendarDate} />
+      <div className="w-full">
+        <Header
+          date={calendarDate}
+          onDateChange={setCalendarDate}
+          hasEvent={daysWithEvents}
+        />
         <CardsSection filters={filterStates} events={eventsToDisplay} />
       </div>
     </div>
