@@ -16,7 +16,7 @@ export const FilterTag = ({ singleFilter, allFilters, onFilterClick }) => {
           singleFilter.selected
             ? "text-gray-700 bg-red-200 border-red-500"
             : "text-gray-700 border-gray-700 hover:bg-green-200 hover:border-green-500",
-          "flex m-1 border rounded-full px-2.5 py-1 font-semibold text-xs group"
+          "flex m-1 border rounded-md px-2.5 py-1 font-semibold text-xs group"
         )}
         onClick={() => {
           onFilterClick(
@@ -66,7 +66,7 @@ const FilterSection = ({ filters, onFilterClick }) => {
               />
               Filtros Selecionados
             </div>
-            <div className="border border-gray-200 bg-gray-50 rounded-md flex flex-wrap mt-1">
+            <div className="border border-gray-200 bg-gray-50 rounded-md flex flex-wrap mt-1 p-1">
               {/* Mostrar filtros selecionados */}
               {filters.map(
                 (filter) =>
@@ -92,7 +92,7 @@ const FilterSection = ({ filters, onFilterClick }) => {
               />
               Filtros disponíveis
             </div>
-            <div className="flex flex-wrap border border-gray-200 bg-gray-50 rounded-md mt-1">
+            <div className="flex flex-wrap border border-gray-200 bg-gray-50 rounded-md mt-1 p-1">
               {/* Mostrar filtros não selecionados */}
               {filters.map(
                 (filter) =>
