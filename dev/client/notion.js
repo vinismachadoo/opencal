@@ -32,24 +32,12 @@ export const fromNotionObject = (notionPage) => {
       propertiesById[process.env.OPENCAL_DESCRIPTION_ID].rich_text[0].text
         .content) ||
     "";
-  const objectLocal =
-    (propertiesById[process.env.OPENCAL_LOCAL_ID].rich_text[0] &&
-      propertiesById[process.env.OPENCAL_LOCAL_ID].rich_text[0].text.content) ||
-    "Não divulgado";
+
   const objectAddress =
     (propertiesById[process.env.OPENCAL_ADDRESS_ID].rich_text[0] &&
       propertiesById[process.env.OPENCAL_ADDRESS_ID].rich_text[0].text
         .content) ||
     "";
-
-  const objectBookmarks =
-    propertiesById[process.env.OPENCAL_BOOKMARKS_ID].number || 0;
-
-  const objectUpVotes =
-    propertiesById[process.env.OPENCAL_UPVOTES_ID].number || 0;
-
-  const objectDownVotes =
-    propertiesById[process.env.OPENCAL_DOWNVOTES_ID].number || 0;
 
   return {
     id: notionPage.id,
@@ -57,13 +45,12 @@ export const fromNotionObject = (notionPage) => {
     name: propertiesById[process.env.OPENCAL_NAME_ID].title[0].text.content,
     description: objectDescription,
     price: propertiesById[process.env.OPENCAL_PRICE_ID].number,
-    upVotes: objectUpVotes,
-    downVotes: objectDownVotes,
-    bookmarks: objectBookmarks,
+    upVotes: propertiesById[process.env.OPENCAL_UPVOTES_ID].number || 0,
+    downVotes: propertiesById[process.env.OPENCAL_DOWNVOTES_ID].number || 0,
+    bookmarks: propertiesById[process.env.OPENCAL_BOOKMARKS_ID].number || 0,
     coverLink: propertiesById[process.env.OPENCAL_COVERURL_ID].url,
     externalLink: propertiesById[process.env.OPENCAL_EXTERNALURL_ID].url,
     address: objectAddress,
-    local: objectLocal,
     startDate: propertiesById[process.env.OPENCAL_DATE_ID].date.start,
     endDate: propertiesById[process.env.OPENCAL_DATE_ID].date.end,
     tags: propertiesById[process.env.OPENCAL_TAGS_ID].multi_select.map(
@@ -90,7 +77,6 @@ export const createEvent = ({
   coverLink,
   externalLink,
   address,
-  local,
   startDate,
   endDate,
   tags,
@@ -141,16 +127,6 @@ export const createEvent = ({
             type: "text",
             text: {
               content: address,
-            },
-          },
-        ],
-      },
-      [process.env.OPENCAL_LOCAL_ID]: {
-        rich_text: [
-          {
-            type: "text",
-            text: {
-              content: local,
             },
           },
         ],
