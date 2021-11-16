@@ -12,15 +12,9 @@ const InlineCalendar = ({ date, onDateChange, hasEvent }) => {
         selected={date}
         // Diferenciar no calendário os dias que tem evento
         dayClassName={(d) => {
-          const dateString = new Date(
-            d.getFullYear(),
-            d.getMonth(),
-            d.getDate()
-          ).toLocaleDateString();
-
-          return hasEvent.includes(dateString) &&
-            dateString != date.toLocaleDateString()
-            ? "bg-green-200 rounded-md"
+          const calDate = new Date(d).setHours(0, 0, 0, 0);
+          return hasEvent.includes(calDate)
+            ? "bg-red-200 rounded-md"
             : undefined;
         }}
         inline
