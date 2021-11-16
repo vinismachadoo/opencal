@@ -8,8 +8,10 @@
   "dependencies": {
     "@headlessui/react": "^1.4.1",
     "@heroicons/react": "^1.0.5",
+    "@notionhq/client": "^0.4.6",
     "@tailwindcss/forms": "^0.3.4",
     "@tailwindcss/line-clamp": "^0.2.2",
+    "dotenv": "^10.0.0",
     "next": "latest",
     "react": "^17.0.2",
     "react-datepicker": "^4.3.0",

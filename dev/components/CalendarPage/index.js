@@ -3,51 +3,40 @@ import InlineCalendar from "./InlineCalendar";
 import FilterSection from "./FilterSection";
 import { useState, useEffect } from "react";
 import CardsSection from "./CardsSection";
-import { EVENTOS } from "../../globals";
 
-const index = () => {
+const index = ({ tags, events }) => {
   const [calendarDate, setCalendarDate] = useState(new Date());
   const [filterStates, setFilterStates] = useState([]);
 
-  useEffect(() => {
-    const defaultFilters = [
-      { id: 1, name: "Funk", selected: false },
-      { id: 2, name: "Pagode", selected: false },
-      { id: 3, name: "Eletrônica", selected: false },
-      { id: 4, name: "Brasilidades", selected: false },
-    ];
-    setFilterStates(defaultFilters);
-  }, []);
-
-  const eventsToDisplay = EVENTOS.filter((event) => {
-    const eventDay = new Date(
-      event.startDate.year,
-      event.startDate.month - 1,
-      event.startDate.day,
-      event.startDate.hour,
-      event.startDate.minute
-    ).getDate();
-
-    const selectedDay = calendarDate.getDate();
-
-    const filterSelectedNames = filterStates
+  const eventsToDisplay = events.filter((ev) => {
+    // event date
+    const evDate = new Date(ev.startDate).setHours(0, 0, 0, 0);
+    // selected date on calendar click
+    const selectedDate = new Date(calendarDate).setHours(0, 0, 0, 0);
+    // array of filters' names selected on the left section
+    const selectedFilters = filterStates
       .filter((filter) => filter.selected)
       .map((filter) => filter.name);
-
-    const tagMatchSelection = filterSelectedNames.filter((value) =>
-      event.tags.includes(value)
+    // lenght of the match array of tags selected and event tags
+    const tagMatchSelection = selectedFilters.filter((value) =>
+      ev.tags.includes(value)
     ).length;
-    return filterSelectedNames.length
-      ? eventDay === selectedDay && tagMatchSelection
-      : eventDay === selectedDay;
+    // return all events of the day if no tag selected, otherwise filter by tag as well
+    return selectedFilters.length
+      ? evDate === selectedDate && tagMatchSelection
+      : evDate === selectedDate;
   });
 
-  const daysWithEvents = EVENTOS.map((event) =>
-    new Date(
-      event.startDate.year,
-      event.startDate.month - 1,
-      event.startDate.day
-    ).toLocaleDateString()
+  useEffect(() => {
+    setFilterStates(
+      tags.map((tag) => {
+        return { ...tag, selected: false };
+      })
+    );
+  }, []);
+
+  const daysWithEvents = events.map((ev) =>
+    new Date(ev.startDate).setHours(0, 0, 0, 0)
   );
 
   return (

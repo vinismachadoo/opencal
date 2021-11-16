@@ -17,7 +17,7 @@ const Right = () => {
     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
       <button
         type="button"
-        className="bg-green-500 p-1 rounded-full text-gray-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-500 focus:ring-white"
+        className="bg-white p-1 rounded-full text-gray-800 hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-white"
       >
         <a href="/favorites">
           <span className="sr-only">View my events</span>
@@ -26,9 +26,9 @@ const Right = () => {
       </button>
       <Menu as="div" className="ml-3 relative">
         <div>
-          <Menu.Button className="bg-green-500 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-500 focus:ring-white">
+          <Menu.Button className="bg-white flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-white">
             <span className="sr-only">Open user menu</span>
-            <UserCircleIcon className="h-6 w-6 text-gray-200 hover:text-white" />
+            <UserCircleIcon className="h-6 w-6 text-gray-800 hover:text-black" />
           </Menu.Button>
         </div>
         <Transition
@@ -40,7 +40,7 @@ const Right = () => {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-5 ring-green-400 ring-opacity-5 focus:outline-none">
+          <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-5 ring-gray-100 ring-opacity-5 focus:outline-none">
             <Menu.Item>
               {({ active }) => (
                 <a

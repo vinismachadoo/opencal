@@ -1,6 +1,14 @@
 import { Disclosure } from "@headlessui/react";
 import { useRouter } from "next/router";
-import { NAVBAR_LABELS } from "../../globals";
+
+export const NAVBAR_LABELS = [
+  {
+    name: "Calendário",
+    href: "/calendar",
+  },
+  { name: "Criar Evento", href: "/create" },
+  { name: "Evento", href: "/event/1" },
+];
 
 const Mobile = () => {
   const router = useRouter();
@@ -24,8 +32,8 @@ const Mobile = () => {
             href={item.href}
             className={classNames(
               item.current
-                ? "bg-green-600 text-white"
-                : "text-white hover:bg-gray-700 hover:text-white",
+                ? "bg-gray-100 text-black"
+                : "text-black hover:bg-gray-100 hover:text-black",
               "block px-3 py-1 rounded-md text-base font-medium"
             )}
             aria-current={item.current ? "page" : undefined}

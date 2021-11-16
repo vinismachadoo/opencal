@@ -58,15 +58,11 @@ const header = ({ date, onDateChange, hasEvent }) => {
                 },
               },
             ]}
+            // Diferenciar no calendário os dias que tem evento
             dayClassName={(d) => {
-              const dateString = new Date(
-                d.getFullYear(),
-                d.getMonth(),
-                d.getDate()
-              ).toLocaleDateString();
+              const calDate = new Date(d).setHours(0, 0, 0, 0);
 
-              return hasEvent.includes(dateString) &&
-                dateString != date.toLocaleDateString()
+              return hasEvent.includes(calDate)
                 ? "bg-green-200 rounded-md"
                 : undefined;
             }}
