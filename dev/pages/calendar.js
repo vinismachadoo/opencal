@@ -5,7 +5,7 @@ const calendar = ({ tags, events }) => {
   return <CalendarPage tags={tags} events={events} />;
 };
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const tags = await getTags();
   const events = await getEvents();
   return {

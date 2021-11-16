@@ -25,7 +25,7 @@ const EventCard = ({ eventData }) => {
         {/* Capa do evento */}
         <img
           src={eventData.coverLink}
-          alt="boy with camera"
+          alt={eventData.name}
           className="object-cover absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 h-full w-full md:group-hover:opacity-30 md:relative"
         />
         {/* Hashtags */}
