@@ -7,19 +7,12 @@ import {
   ThumbUpIcon as ThumbUpIconSolid,
   ThumbDownIcon as ThumbDownIconSolid,
   BookmarkIcon as BookmarkIconSolid,
-  LocationMarkerIcon,
 } from "@heroicons/react/solid";
 import { useState } from "react";
 
 const EventCard = ({ eventData }) => {
   const today = new Date();
-  const lastUpdate = new Date(
-    eventData.lastUpdate.year,
-    eventData.lastUpdate.month - 1,
-    eventData.lastUpdate.day,
-    eventData.lastUpdate.hour,
-    eventData.lastUpdate.minute
-  );
+  const lastUpdate = new Date(eventData.lastUpdateTime);
   const daysSinceLastUpdate = (today - lastUpdate) / 86400000;
 
   const [isHeartOutline, setIsHeartOutline] = useState(true);
@@ -54,15 +47,9 @@ const EventCard = ({ eventData }) => {
         <div className="p-2 md:p-4 border-r-2 border-t-2 rounded-tr-md md:border-l-2 md:border-t-0 md:rounded-none  border-gray-100">
           <h3 className="font-bold text-md line-clamp-1">{eventData.title}</h3>
           {/* Endereço */}
-          <div className="flex items-center text-xs font-semibold rounded-md mb-3 text-gray-800 w-auto">
-            {/* <LocationMarkerIcon
-              className="flex-shrink-0 mr-1 h-3 w-3"
-              aria-hidden="true"
-            /> */}
-            <span className="line-clamp-1">
-              {eventData.hasLocal ? eventData.local : "Indefinido"}
-              {eventData.hasAddress ? `, ${eventData.address}` : ""}
-            </span>
+          <div className="items-center text-xs font-semibold rounded-md mb-3 text-gray-800 w-auto">
+            <span className="line-clamp-1">{eventData.local}</span>
+            <span className="line-clamp-1">{eventData.address}</span>
           </div>
           <div className="flex justify-end md:justify-center mt-2 md:mt-4">
             {/* Ações */}
@@ -81,7 +68,7 @@ const EventCard = ({ eventData }) => {
                 />
               )}
               <span className="mr-2 md:mr-3 text-xs md:text-sm">
-                {eventData.favorites}
+                {eventData.bookmarks}
               </span>
               {isUpVoteOutline ? (
                 <ThumbUpIconOutline
@@ -97,7 +84,7 @@ const EventCard = ({ eventData }) => {
                 />
               )}
               <span className="mr-2 md:mr-3 text-xs md:text-sm">
-                {eventData.upvotes}
+                {eventData.upVotes}
               </span>
               {isDownVoteOutline ? (
                 <ThumbDownIconOutline
@@ -112,7 +99,7 @@ const EventCard = ({ eventData }) => {
                   onClick={() => setIsDownVoteOutline(!isDownVoteOutline)}
                 />
               )}
-              <span className="text-xs md:text-sm">{eventData.downvotes}</span>
+              <span className="text-xs md:text-sm">{eventData.downVotes}</span>
             </div>
           </div>
         </div>
