@@ -1,4 +1,14 @@
 const CreateEvent = () => {
+  const newEvent = async () => {
+    const event = await fetch("http://localhost:3000/api/opencal/create", {
+      method: "POST",
+      body: JSON.stringify({ name: "new event" }),
+    });
+    const content = await event.json();
+
+    console.log(content);
+  };
+
   return (
     <>
       <div>
